@@ -67,9 +67,7 @@ Uses SB-Admin
 {% block leftbar %}
 <div class="collapse navbar-collapse navbar-ex1-collapse">
   <ul class="nav navbar-nav side-nav">
-    {% if currentUserName() %}
-    {% endif %} 
-    
+    {#
       <li{{hpic('user')}}><a href="/users">
         <i class="fa fa-user"></i>
         Users</a></li>
@@ -90,6 +88,7 @@ Uses SB-Admin
       <li{{hpic('book')}}><a href="/books">
         <i class="fa fa-book"></i>
         Books</a></li>
+    #}    
         
   </ul>
 </div>
