@@ -1,0 +1,46 @@
+{# testForm.html
+   =============
+
+A form to test bozen forms
+#}
+{% extends "main.html" %}
+
+{% block body %}
+<h1><i class='fa fa-check-square-o'></i> Test Form</h1>
+
+<p>This is a test form, for testing <tt>FormDoc</tt>.</p>
+
+<form method=POST>
+{{theTF.buildForm()}}
+
+<p><br>
+<button class='btn btn-primary'>
+   <i class='fa fa-arrow-circle-right'></i> 
+   Submit Form</button></p>
+</form>
+
+{% if resultTable %}
+<h2><i class='fa fa-table'></i> Form Contents</h2>
+
+{{resultTable}}
+
+<h3><i class='fa fa-key'></i> Key to Form</h3>
+
+<ul>
+   <li><b>Py Name</b> = the name of the field, internally in Python</li>
+   <li><b>Screen Name</b> = the name of the field, 
+       as it appears on the screen</li>
+   <li><b>Field Type</b> = the type of the <tt>FieldInfo</tt> object</li>
+   <li><b>Py Value</b> = the value of the field, internally in Python</li>
+   <li><b>Screen Value</b> = the value of the field,
+       as it appears on the screen</li>
+   <li><b>Value Type</b> = the type of the Py Value</li>
+</ul>
+
+{% endif %}
+
+
+{% endblock body %}
+
+
+{# end #}
