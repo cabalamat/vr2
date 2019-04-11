@@ -189,21 +189,22 @@ hr {
   border: solid 1px #999;
 }
 
-h1 { font-size: 30px; }
+h1 { font-size: 35px; }
 h2 {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
   margin: 15px 0 5px 0;
 }
 h3 {
-  font-size: 21px;
+  font-size: 24px;
   margin: 13px 0 2px 0;
 }
 h4 {
-  font-size: 18px;
+  font-size: 20px;
   color: #000;
 }
 h1,h2,h3,h4 { 
+  font-weight: bold;
   color: #349; 
 }
 
@@ -220,8 +221,8 @@ label {
 .navbar, .navbar-brand,
 .navbar-header, .navbar-header a, a.dropdown-toggle, .dropdown a,
 .side-nav, .side-nav a {
-  color: #ff8 !important;
-  background: #248 !important;
+  color: #fe0 !important;
+  background: #039 !important;
   font-family: "Roboto";
   font-weight: bold;
 }
@@ -545,20 +546,9 @@ tt.filename {
 }
 
 /*------------------------------------------------------------------*/
-/* different from alphabet */
-
 
 body {
   color: #000;
-}
-
-h1 {
-  font-weight: bold;
-  font-size: 30px;
-  margin-top: 6px;
-}
-h1 small {
-  font-size: 80%;
 }
 
 .side-nav {
@@ -769,6 +759,13 @@ input[type=checkbox], input[type=radio] {
 .icon-noun_1596749_cc:before {
   content: "\e900";
 }
+
+/*------------------------------------------------------------------*/
+
+.highlight { 
+    background: #ff8;
+    font-weight: bold;
+}    
 
 /*------------------------------------------------------------------*/
 

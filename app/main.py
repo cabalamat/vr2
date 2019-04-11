@@ -18,16 +18,7 @@ import templateglobal
 import models
 
 # pages of app:
-import login
 import front
-import testform
-import foo
-
-#---------------------------------------------------------------------
-
-#@app.route("/")
-#def hello():
-#    return "Hello World!"
 
 #---------------------------------------------------------------------
 
