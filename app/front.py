@@ -34,7 +34,9 @@ def regionTable():
     <th>Seats</th>
 </tr>
 """
-    for r in region.Region.all():
+    totSeats = 0
+    rs = sorted(region.Region.all(), key = lambda r: r.ix)
+    for r in rs:
         h += form("""<tr>
     <td>{a}</td>
     <td>{seats}</td>
@@ -42,7 +44,14 @@ def regionTable():
             a = r.a(),
             seats = r.seats,
         )
+        totSeats += r.seats
     #//for r  
+    h += form("""<tr style='font-weight:bold'>
+    <td>TOTAL</td>
+    <td>{seats}</td>
+</tr>""",
+            seats = totSeats,
+    )
     h += "</table>"
     return h
 

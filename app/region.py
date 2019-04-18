@@ -3,6 +3,7 @@
 from typing import ClassVar, Dict, Any
 
 from bozen.bztypes import HtmlStr
+from bozen import butil
 
 import mark
 import entity
@@ -17,13 +18,14 @@ class Region(entity.Entity):
     @classmethod
     def makeRegion(cls, id, name, **kwargs) -> 'Region':
         r = Region(id, name, **kwargs)
+        r.ix = len(cls.docs) + 1
         cls.docs[id] = r
         return r
     
     def blurb(self) -> HtmlStr:
         """ Text on the region from the (md) markdown """
-        md = self.md
-        h = martk.render(md)
+        md = butil.exValue(lambda: self.md, "")
+        h = mark.render(md)
         return h
     
 def reg(id, name, **kwargs):
@@ -50,14 +52,39 @@ md="""\
 
 reg("ni", "Northern Ireland", seats=3,
 md="""\
-**Northern Ireland** uses a different electiral system than the rest of the UK;
-it uses STV whereas everyone else uses closed party lists.    
+**Northern Ireland** uses a different electoral system than the rest of the UK;
+it uses STV whereas everyone else uses closed party lists. 
+
+Furthermore, different parties stand in Northern Ireland, compared with
+the rest of the UK.
 """) 
 
-reg("nee", "NE England", seats=3,
+reg("nee", "NE England", longName="North East England", seats=3,
 md="""\
 **North East England**
 """)   
+
+reg("nwe", "NW England", longName="North West England", seats=8)
+reg("york", "Yorkshire", longName="Yorkshire and the Humber", seats=6)
+reg("wales", "Wales", seats=4)
+reg("em", "East Midlands", seats=5)
+reg("wm", "West Midlands", seats=7)
+reg("ee", "East of England", seats=7)
+reg("swe", "SW England", longName="South West England", seats=6)
+reg("see", "SE England", longName="South East England", seats=10)
+reg("london", "London", seats=8)
+
+'''
+makeRegion("nee", "NE England", "North East England")
+makeRegion("nwe", "NW England", "North West England")
+makeRegion("york", "Yorkshire", "Yorkshire and the Humber")
+makeRegion("em", "East Midlands")
+makeRegion("wm", "West Midlands")
+makeRegion("ee", "East of England")
+makeRegion("see", "SE England", "South East England")
+makeRegion("swe", "SW England", "South West England")
+makeRegion("london", "London")
+'''
 
 #---------------------------------------------------------------------
 
