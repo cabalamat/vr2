@@ -10,7 +10,13 @@ Created.
 
 ## 2019-Apr-18
 
-Moved <requirements.txt> to app/
+Moved `requirements.txt` to `app/`
+
+## 2019-Apr-18
+
+Created `Region` class, `/regions` and `/region` endpoints.
+
+Numerous minor changes.
 
 
 
