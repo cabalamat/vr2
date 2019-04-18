@@ -1,0 +1,18 @@
+{# region.html
+   ===========
+
+A Region of the UK
+#}
+{% extends "main.html" %}
+
+{% block body %}
+<h1><i class='fa fa-map-marker'></i> Region: {{r.getLongNameH()}}</h1>
+
+{{r.blurb()}}
+
+<p>This region elects {{r.seats}} MEPs.</p>
+
+{% endblock body %}
+
+
+{# end #}
