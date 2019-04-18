@@ -8,6 +8,10 @@ New entries go at the end.
 
 Created.
 
+## 2019-Apr-18
+
+Moved <requirements.txt> to app/
+
 
 
 
