@@ -249,7 +249,8 @@ li.dropdown a:hover
 .nav li.active a:hover,
 .nav a.dropdown-toggle:focus
 {
-  background: #000 !important;
+  color: #039 !important;
+  background: #fe0 !important;
 }
 
 a.dropdown-toggle:hover span.badge,

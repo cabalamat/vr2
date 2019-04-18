@@ -19,4 +19,24 @@ def front():
     return h
 
 
+#---------------------------------------------------------------------
+
+@app.route('/regions')
+def regions():
+    tem = jinjaEnv.get_template("regions.html")
+    h = tem.render(
+    )
+    return h
+
+
+#---------------------------------------------------------------------
+
+@app.route('/links')
+def links():
+    tem = jinjaEnv.get_template("links.html")
+    h = tem.render(
+    )
+    return h
+
+
 # end

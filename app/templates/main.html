@@ -67,6 +67,17 @@ Uses SB-Admin
 {% block leftbar %}
 <div class="collapse navbar-collapse navbar-ex1-collapse">
   <ul class="nav navbar-nav side-nav">
+      <li{{hpic('region')}}><a href="/regions">
+        <i class="fa fa-map-marker"></i>
+        Regions</a></li>
+        
+      <li{{hpic('party')}}><a href="/partys">
+        <i class="fa fa-certificate"></i>
+        Parties</a></li>
+        
+      <li{{hpic('links')}}><a href="/links">
+        <i class="fa fa-external-link-square"></i>
+        Links</a></li>
     {#
       <li{{hpic('user')}}><a href="/users">
         <i class="fa fa-user"></i>
