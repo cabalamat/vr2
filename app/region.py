@@ -66,7 +66,11 @@ md="""\
 
 reg("nwe", "NW England", longName="North West England", seats=8)
 reg("york", "Yorkshire", longName="Yorkshire and the Humber", seats=6)
-reg("wales", "Wales", seats=4)
+
+reg("wales", "Wales", seats=4,
+md="""**Wales** is the only region where Plaid Cymru stands.
+""")
+
 reg("em", "East Midlands", seats=5)
 reg("wm", "West Midlands", seats=7)
 reg("ee", "East of England", seats=7)
