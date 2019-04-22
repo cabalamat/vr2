@@ -5,7 +5,7 @@ Basic utilities for Python 3.x.
 """
 
 from typing import *
-import os, os.path
+import os, os.path, stat
 import sys
 import html
 import inspect
@@ -13,6 +13,7 @@ import functools
 import pprint
 
 #---------------------------------------------------------------------
+# file functions
 
 def normalizePath(p: str, *pathParts: List[str]) -> str:
     """ Normalize a file path, by expanding the user name and getting
@@ -30,6 +31,23 @@ def normalizePath(p: str, *pathParts: List[str]) -> str:
     return p2
 normalisePath=normalizePath # alternate spelling
 join=normalizePath # it works like os.path.join, but better
+
+def fileExists(fn: str) -> bool:
+    """ Does a file exist?
+    @param fn  = a filename or pathname
+    @return = True if (fn) is the filename of an existing file
+        and it is readable.
+    """
+    fn = os.path.expanduser(fn)
+    readable = os.access(fn, os.R_OK)
+    # (if it doesn't exist, it can't be readable, so don't bother
+    # testing that separately)
+
+    if not readable: return False
+
+    # now test if it's a file
+    mode = os.stat(fn)[stat.ST_MODE]
+    return stat.S_ISREG(mode)
 
 #---------------------------------------------------------------------
 # formatting functions
