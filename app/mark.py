@@ -14,6 +14,7 @@ from bozen.butil import dpr
 markdownProcessor = markdown.Markdown(extensions=[
     'extra',
     'sane_lists',
+    'toc',
     ])
 
 def render(s: str) -> str:

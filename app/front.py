@@ -39,16 +39,16 @@ def regionTable():
     for r in rs:
         h += form("""<tr>
     <td>{a}</td>
-    <td>{seats}</td>
+    <td style='text-align:right'>{seats}</td>
 </tr>""",
             a = r.a(),
-            seats = r.seats,
+            seats = r.asReadableH('seats'),
         )
         totSeats += r.seats
     #//for r  
     h += form("""<tr style='font-weight:bold'>
     <td>TOTAL</td>
-    <td>{seats}</td>
+    <td style='text-align:right'>{seats}</td>
 </tr>""",
             seats = totSeats,
     )

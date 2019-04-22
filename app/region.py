@@ -4,6 +4,7 @@ from typing import ClassVar, Dict, Any
 
 from bozen.bztypes import HtmlStr
 from bozen import butil
+from bozen import (FormDoc, IntField, StrField, TextAreaField)
 
 import mark
 import entity
@@ -12,7 +13,7 @@ from allpages import app, jinjaEnv
 #---------------------------------------------------------------------
 
 class Region(entity.Entity):
-    
+    #========== class stuff ==========
     docs: ClassVar[Dict[str, 'Region']] = {}
     
     @classmethod
@@ -21,6 +22,14 @@ class Region(entity.Entity):
         r.ix = len(cls.docs) + 1
         cls.docs[id] = r
         return r
+    
+    #========== instance ==========
+    #_id = StrField(desc="unique identifier of entity")
+    name = StrField(desc="short name of entity")
+    longName = StrField(desc="long name of entity")
+    seats = IntField(desc="number of seats in region")
+    md = TextAreaField(desc="markdown source for text description")
+    
     
     def blurb(self) -> HtmlStr:
         """ Text on the region from the (md) markdown """
