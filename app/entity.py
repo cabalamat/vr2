@@ -12,16 +12,22 @@ from bozen import (FormDoc, IntField, StrField)
 An entity is a bit like a MonDoc, but in memory (not in a database)
 """
 
-class Entity(FormDoc):
+class Entity:
     
+    _id: str
+    name: str = ""
+    longName: str = ""
+    
+    '''
     _id = StrField(desc="unique identifier of entity")
     name = StrField(desc="short name of entity")
     longName = StrField(desc="long name of entity")
+    '''
     
     def __init__(self, id: str, name: str, **kwargs):
-        super().__init__(**kwargs)
         self._id = id
         self.name = name
+        self.__dict__.update(kwargs)
         
     def __repr__(self) -> str:
         """ string for debugging """

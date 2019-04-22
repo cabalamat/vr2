@@ -24,12 +24,13 @@ class Region(entity.Entity):
         return r
     
     #========== instance ==========
+    '''
     #_id = StrField(desc="unique identifier of entity")
     name = StrField(desc="short name of entity")
     longName = StrField(desc="long name of entity")
     seats = IntField(desc="number of seats in region")
     md = TextAreaField(desc="markdown source for text description")
-    
+    '''
     
     def blurb(self) -> HtmlStr:
         """ Text on the region from the (md) markdown """

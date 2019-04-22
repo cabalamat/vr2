@@ -42,7 +42,7 @@ def regionTable():
     <td style='text-align:right'>{seats}</td>
 </tr>""",
             a = r.a(),
-            seats = r.asReadableH('seats'),
+            seats = r.seats,
         )
         totSeats += r.seats
     #//for r  
