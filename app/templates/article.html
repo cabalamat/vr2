@@ -5,8 +5,10 @@ An article
 #}
 {% extends "main.html" %}
 
-{% block body %}
+{% block body %} 
+{{rowcol("md-6")}}
 {{wikiText}}
+{{endrow()}}
 
 {% endblock body %}
 
