@@ -5,7 +5,10 @@ Basic utilities for Python 3.x.
 """
 
 from typing import *
-import os, os.path, stat
+import os
+import os.path
+import stat
+import fnmatch
 import sys
 import html
 import inspect
@@ -48,6 +51,24 @@ def fileExists(fn: str) -> bool:
     # now test if it's a file
     mode = os.stat(fn)[stat.ST_MODE]
     return stat.S_ISREG(mode)
+
+def getFilenames(dir: str, pattern:str="*") -> List[str]:
+    """ Return a list of all the filenames in a directory that match a
+    pattern. Note that this by default returns files and subdirectories.
+    @param dir = a directory
+    @param pattern = a Unix-style file wildcard pattern
+    @return = the files that matched, sorted in ascii order
+    """
+    try:
+        filenames = os.listdir(dir)
+    except:
+        filenames = []
+    matching = []
+    for fn in filenames:
+        if fnmatch.fnmatch(fn, pattern):
+            matching.append(fn)
+    matching.sort()
+    return matching
 
 #---------------------------------------------------------------------
 # formatting functions

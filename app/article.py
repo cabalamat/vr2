@@ -13,7 +13,31 @@ import mark
 ARTICLE_DIR = butil.join(
     os.path.dirname(os.path.abspath( __file__ )), 
     "article")
-prn("ARTICLE_DIR=%s", ARTICLE_DIR)
+
+#---------------------------------------------------------------------
+
+
+@app.route('/articles')
+def articles():
+    """ return list of articles """
+    tem = jinjaEnv.get_template("articles.html")
+    h = tem.render(
+        articleList = getArticles(),
+    )
+    return h
+
+def getArticles():
+    articleFns = butil.getFilenames(ARTICLE_DIR, "*.md")
+    h = ""
+    for afn in articleFns:
+        title = getTitle.butil.join(ARTICLE_DIR, afn)
+        h = form("<p><a href='/article/{art}'>{title}</a></p>\n",
+            art = afn,
+            title = title)
+    #//for
+    return h
+
+#---------------------------------------------------------------------
 
 @app.route('/article/<art>')
 def article(art):
@@ -81,6 +105,18 @@ def getPan(art: str):
     """
     return butil.join(ARTICLE_DIR, art)
     return ""
+
+def getTitle(pan: str) -> str:
+    """ get the title of an article
+    @param pan = full pathname to the article
+    """
+    src = butil.readFile(pan).decode('utf-8', 'ignore')
+    lines = src.split("\n")
+    if len(lines)==0: return ""
+    t = md(convertQuickLinks(lines[0].strip(" #")))
+    if t.startswith("<p>"): t = t[3:]
+    if t.endswith("</p>"): t = t[:-4]
+    return t
 
 #---------------------------------------------------------------------
 
