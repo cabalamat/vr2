@@ -2,9 +2,12 @@
 
 from typing import Iterator, Union
 
+from bozen import butil
 from bozen.butil import dpr, printargs, htmlEsc, attrEsc, form
 from bozen.bztypes import HtmlStr
 from bozen import (FormDoc, IntField, StrField)
+
+import mark
 
 #---------------------------------------------------------------------
 
@@ -17,6 +20,7 @@ class Entity:
     _id: str
     name: str = ""
     longName: str = ""
+    md: str = ""
     
     '''
     _id = StrField(desc="unique identifier of entity")
@@ -57,6 +61,12 @@ class Entity:
     def getLongNameH(self) -> HtmlStr:
         """ long name, html-encoded """       
         return htmlEsc(self.getLongName())
+    
+    def blurb(self) -> HtmlStr:
+        """ Text on the region from the (md) markdown """
+        md = butil.exValue(lambda: self.md, "")
+        h = mark.render(md)
+        return h
 
     @classmethod
     def stub(cls) -> str:

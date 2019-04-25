@@ -3,7 +3,7 @@
 import os.path
 
 from bozen import butil
-from bozen.butil import pr, prn, dpr
+from bozen.butil import pr, prn, dpr, form
 
 from allpages import app, jinjaEnv
 import mark
@@ -30,9 +30,9 @@ def getArticles():
     articleFns = butil.getFilenames(ARTICLE_DIR, "*.md")
     h = ""
     for afn in articleFns:
-        title = getTitle.butil.join(ARTICLE_DIR, afn)
+        title = getTitle(butil.join(ARTICLE_DIR, afn))
         h = form("<p><a href='/article/{art}'>{title}</a></p>\n",
-            art = afn,
+            art = afn[:-3],
             title = title)
     #//for
     return h
@@ -110,10 +110,10 @@ def getTitle(pan: str) -> str:
     """ get the title of an article
     @param pan = full pathname to the article
     """
-    src = butil.readFile(pan).decode('utf-8', 'ignore')
+    src = open(pan).read()
     lines = src.split("\n")
     if len(lines)==0: return ""
-    t = md(convertQuickLinks(lines[0].strip(" #")))
+    t = mark.render(lines[0].strip(" #"))
     if t.startswith("<p>"): t = t[3:]
     if t.endswith("</p>"): t = t[:-4]
     return t

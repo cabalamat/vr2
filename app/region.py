@@ -4,7 +4,6 @@ from typing import ClassVar, Dict, Any
 
 from bozen.bztypes import HtmlStr
 from bozen import butil
-from bozen import (FormDoc, IntField, StrField, TextAreaField)
 
 import mark
 import entity
@@ -24,19 +23,8 @@ class Region(entity.Entity):
         return r
     
     #========== instance ==========
-    '''
-    #_id = StrField(desc="unique identifier of entity")
-    name = StrField(desc="short name of entity")
-    longName = StrField(desc="long name of entity")
-    seats = IntField(desc="number of seats in region")
-    md = TextAreaField(desc="markdown source for text description")
-    '''
+    seats: int = 0
     
-    def blurb(self) -> HtmlStr:
-        """ Text on the region from the (md) markdown """
-        md = butil.exValue(lambda: self.md, "")
-        h = mark.render(md)
-        return h
     
 def reg(id, name, **kwargs):
     return Region.makeRegion(id, name, **kwargs)
