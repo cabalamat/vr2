@@ -84,8 +84,7 @@ def gbPartyTable() -> str:
     for p in ps:
         h += form("""<tr>
     <td>{a}</td>
-    <td><span style='color:{col}'><i class='fa fa-certificate'></i></span>
-        {longName}</td>
+    <td>{longName}</td>
     <td style='text-align:right'>{votes14:.1f}</td>
     <td style='text-align:right'>{seats14}</td>
     <td>{regs}</td>

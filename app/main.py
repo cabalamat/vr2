@@ -19,6 +19,7 @@ import models
 
 # pages of app:
 import front
+import poll
 import article
 import party
 

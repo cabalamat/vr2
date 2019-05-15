@@ -3,6 +3,7 @@
 from typing import ClassVar, Dict, Any
 
 from bozen.bztypes import HtmlStr
+from bozen.butil import pr, prn, form, htmlEsc
 from bozen import butil
 
 import mark
@@ -30,6 +31,13 @@ class Party(entity.Entity):
     seats14: int = 0 # seats in 2014
     col: str = "#666" # colour (from wikipedia)
     notes: str = "" # notes
+    
+    def logo(self) -> str:
+        """ return the party's logo """
+        s = form("<span style='color:{col}'>"
+            "<i class='fa fa-certificate'></i></span> ",
+            col = self.col)
+        return s
     
 def par(id, name, **kwargs):
     return Party.makeParty(id, name, **kwargs)
