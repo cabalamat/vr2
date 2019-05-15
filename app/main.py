@@ -20,6 +20,7 @@ import models
 # pages of app:
 import front
 import article
+import party
 
 #---------------------------------------------------------------------
 

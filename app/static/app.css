@@ -447,6 +447,9 @@ input[type=checkbox], input[type=radio] {
     font-weight: bold;
 }    
 
+.yes { color: #090;}
+.no  { color: #900;}
+
 /*------------------------------------------------------------------*/
 
 /*end */

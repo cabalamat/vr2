@@ -53,7 +53,8 @@ md="""\
 **Northern Ireland** uses a different electoral system than the rest of the UK;
 it uses STV whereas everyone else uses closed party lists. 
 
-Furthermore, different parties stand in Northern Ireland, compared with
+Furthermore, different [parties](/niparties) stand in 
+Northern Ireland, compared with
 the rest of the UK.
 """) 
 

@@ -8,7 +8,7 @@ APP_DATE_FORMAT = "%Y-%b-%d"
 PORT=9040
 
 # title on web pages
-APP_TITLE = "Vote Remain"
+APP_TITLE = "Vote Remain 23 May"
 APP_LOGO = "<i class='fa fa-star'></i> "
 
 # unique identifier for the app, typically the same as its directory 
