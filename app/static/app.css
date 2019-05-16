@@ -451,5 +451,25 @@ input[type=checkbox], input[type=radio] {
 .no  { color: #900;}
 
 /*------------------------------------------------------------------*/
+/* reports and charts */
+
+.chart-container {
+    box-sizing: border-box;
+    width: 850px;
+    height: 400px;
+    padding: 20px 15px 15px 15px;
+    //margin: 15px 15px 30px 15px;
+    //border: 2px solid #339;
+    background: #fff;
+}
+
+.chart {
+    width: 100%;
+    height: 100%;
+    font-size: 13px;
+    line-height: 1.2em;
+}
+
+/*------------------------------------------------------------------*/
 
 /*end */

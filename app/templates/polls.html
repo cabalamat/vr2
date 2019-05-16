@@ -13,7 +13,56 @@ href="https://en.wikipedia.org/wiki/2019_European_Parliament_election_in_the_Uni
 
 {{table}}
 
-<h2>Graph</h2>
+<h2>Poll Graph</h2>
+<div class="chart-container">
+  <div id="pollChart" class="chart"></div>
+</div>
 
 {% endblock body %}
+
+{% block atend %}
+<script src="/static/flot/jquery.flot.js"></script>
+<script src="/static/flot/jquery.flot.symbol.js"></script>
+
+<script  src="/static/flot/jquery.js"></script>
+<script  src="/static/flot/jquery.canvaswrapper.js"></script>
+<script  src="/static/flot/jquery.colorhelpers.js"></script>
+<script  src="/static/flot/jquery.flot.js"></script>
+<script  src="/static/flot/jquery.flot.saturated.js"></script>
+<script  src="/static/flot/jquery.flot.browser.js"></script>
+<script  src="/static/flot/jquery.flot.drawSeries.js"></script>
+<script  src="/static/flot/jquery.flot.errorbars.js"></script>
+<script  src="/static/flot/jquery.flot.uiConstants.js"></script>
+<script  src="/static/flot/jquery.flot.logaxis.js"></script>
+<script  src="/static/flot/jquery.flot.symbol.js"></script>
+<script  src="/static/flot/jquery.flot.flatdata.js"></script>
+<script  src="/static/flot/jquery.flot.navigate.js"></script>
+<script  src="/static/flot/jquery.flot.fillbetween.js"></script>
+<script  src="/static/flot/jquery.flot.stack.js"></script>
+<script  src="/static/flot/jquery.flot.touchNavigate.js"></script>
+<script  src="/static/flot/jquery.flot.hover.js"></script>
+<script  src="/static/flot/jquery.flot.touch.js"></script>
+<script  src="/static/flot/jquery.flot.time.js"></script>
+<script  src="/static/flot/jquery.flot.axislabels.js"></script>
+<script  src="/static/flot/jquery.flot.selection.js"></script>
+<script  src="/static/flot/jquery.flot.composeImages.js"></script>
+<script  src="/static/flot/jquery.flot.legend.js"></script>
+
+<script>
+$(function() {
+
+$.plot("#pollChart", 
+   {{chartData}},
+   {{chartOptions}}
+);
+
+
+
+// Add the Flot version string to the footer
+$("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
+    
+});
+</script>
+{% endblock atend %}
+
 {# end #}
