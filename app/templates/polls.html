@@ -6,17 +6,29 @@ Polls
 {% extends "main.html" %}
 
 {% block body %}
-<h1><i class='fa fa-bar-chart'></i> Polls</h1>
+<h1><i class='fa fa-bar-chart'></i> Opinion Polls</h1>
 
-<p>Opinion polls (<a 
-href="https://en.wikipedia.org/wiki/2019_European_Parliament_election_in_the_United_Kingdom#National_poll_results">from Wikipedia</a>):</p>
+<p>The data in this opinion polls is from <a 
+href="https://en.wikipedia.org/wiki/2019_European_Parliament_election_in_the_United_Kingdom#National_poll_results">Wikipedia</a>.
+I've removed SNP and PC, because they only stand in Scotland and Wales
+respectively, so their share of the national poll is meaningless.</p>
 
 {{table}}
 
-<h2>Poll Graph</h2>
+<h2>Graph With Trend</h2>
+
+<p>Party Strengths: {{partyLegend}}</p>
+
 <div class="chart-container">
   <div id="pollChart" class="chart"></div>
-</div>
+  <div class='flot-x-axis flot-x1-axis'>
+    <div class='flot-tick-label'>
+      &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+      Days to election
+      <i class='fa fa-long-arrow-right'></i>
+    </div>
+  </div>
+</div>  
 
 {% endblock body %}
 
@@ -55,11 +67,6 @@ $.plot("#pollChart",
    {{chartData}},
    {{chartOptions}}
 );
-
-
-
-// Add the Flot version string to the footer
-$("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
     
 });
 </script>

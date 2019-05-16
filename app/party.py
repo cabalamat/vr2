@@ -81,7 +81,7 @@ par("ld", "LD", longName="Liberal Democrats",
 par("chuk", "ChUK", longName="Change UK", 
     isRemain=True,
     regs="gb",
-    col="#3C3C3B",
+    col="#4C4C4B",
     votes14=0, seats14=0,
     md="""\
 """)
@@ -106,7 +106,7 @@ The **Brexit Party** was founded in 2019 by Nigel Farage.
 par("ukip", "UKIP", longName="United Kingdom Independence Party", 
     isRemain=False,
     regs="gb",
-    col="#70147A",
+    col="#90147A",
     votes14=26.6, seats14=24,
     md="""\
 """)

@@ -456,8 +456,8 @@ input[type=checkbox], input[type=radio] {
 .chart-container {
     box-sizing: border-box;
     width: 850px;
-    height: 400px;
-    padding: 20px 15px 15px 15px;
+    height: 600px;
+    padding: 0px 15px 15px 15px;
     //margin: 15px 15px 30px 15px;
     //border: 2px solid #339;
     background: #fff;

@@ -4,7 +4,7 @@ from typing import Iterator, Union, ClassVar, List, Tuple
 import json
 
 import bozen
-from bozen.butil import pr, prn, form, htmlEsc
+from bozen.butil import pr, prn, dpr, form, htmlEsc
 from bozen import BzDate
 
 from allpages import app, jinjaEnv
@@ -18,12 +18,15 @@ import party
 @app.route('/polls')
 def polls():
     tem = jinjaEnv.get_template("polls.html")
+    chartData, partyStrengths = pollChartData()
+    partyLegend = getPartyLegend(partyStrengths)
     h = tem.render(
         table = pollTable(),
-        chartData = json.dumps(pollChartData(), 
+        chartData = json.dumps(chartData, 
             sort_keys=True, indent=4),
         chartOptions = json.dumps(pollChartOptions(), 
             sort_keys=True, indent=4),
+        partyLegend = partyLegend,
     )
     return h
 
@@ -75,6 +78,7 @@ def pollChartData() -> dict:
     # polls, sorted earliest first
     allPolls = sorted(Poll.polls, key=lambda po: po.dateInt)
     j = []
+    partyStrengths = []
     for p in POLL_PARTIES:
         pa = party.Party.docs[p]
         xySeries = []
@@ -99,10 +103,24 @@ def pollChartData() -> dict:
         }    
         j.append(series)
         j.append(trendSeries)
+        j.append({
+            'data': [[0,0]],
+            #'points': {'show': True}
+        })    
+        partyStrengths.append({
+            'name': pa.getNameH(),    
+            'color': pa.col,
+            'strength': trendSeries['data'][-1][1]
+        })    
     #//for pa   
-    return j
+    j.append({
+        'data': [[0,0]],
+        #'points': {'show': True}
+    })  
+    dpr("partyStrengths=%r", partyStrengths)
+    return j, partyStrengths
 
-DECAY_HL = 3.5 # half-life, days
+DECAY_HL = 3 # half-life, days
 
 def calcTrend(trendData) -> float:
     """
@@ -141,9 +159,35 @@ def removeDuplicateDates(trendSeries):
     #//for    
     return result
 
+def getPartyLegend(partyStrengths) -> str:
+    """ return HTML to go at the top of the chart showing 
+    parties, in order of their trend strength, with percentage 
+    and color.
+    """
+    # sort, largest 1st
+    ps2 = sorted(partyStrengths, key=lambda ps: ps['strength'])[::-1]
+    
+    dpr("ps2=%r", ps2)
+    h = ""
+    for ps in ps2:
+        dpr("ps=%r", ps)
+        name = ps['name']
+        color = ps['color']
+        strength = ps['strength']
+        h += form("""<span style='color:{color}'>
+            {strength:.1f}% {name}</span> &nbsp; """,
+            color = color,
+            strength = strength,
+            name = name)       
+    #//for   
+    dpr("h=%s", h)
+    return h
+
 def pollChartOptions() -> dict:
     j = {
-        'yaxis': {'min': 0}
+        'yaxis': {'min': 0},
+        'xaxis': {'max': 0,
+                  'tickSize': 7}
     }
     return j
 
@@ -355,13 +399,6 @@ addPoll(
     vs="7 38 23 8 4 10 4"
 )
 
-#===== 30 Mar
-addPoll(
-    date="2019-03-30",
-    org="Opinium",
-    sample=2008,
-    vs="18 30 24 10 8 0 0"
-)
 
 
     
