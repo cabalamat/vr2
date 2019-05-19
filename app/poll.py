@@ -44,6 +44,7 @@ def pollTable() -> str:
     <th>End<br>Date</th>
     <th>Days<br>to Poll</th>
     <th>Polling<br>Org</th>
+    <th>Sample<br>Size</th>
     {partyCols}
 </tr>
 """, 
@@ -52,17 +53,21 @@ def pollTable() -> str:
     for po in allPolls:
         partyCells = ""  
         for p in POLL_PARTIES:
-            partyCells += ("<td style='text-align:right'>%.1f</td>\n" 
-                % (po.__dict__[p],))
+            pa = party.Party.docs[p]
+            partyCells += ("<td style='text-align:right;color:%s'"
+                ">%.1f</td>\n" 
+                % (pa.col, po.__dict__[p],))
         h += form("""<tr>
     <td>{date}</td>
     <td style='text-align:right'>{dateInt}</td>
     <td>{org}</td>
+    <td style='text-align:right'>{sample}</td>
     {partyCells}
 </tr>""",
             date = htmlEsc(po.date),
             dateInt = po.dateInt,
             org = htmlEsc(po.org),
+            sample = htmlEsc(str(po.sample)),
             partyCells = partyCells)
 
 
@@ -120,7 +125,7 @@ def pollChartData() -> dict:
     dpr("partyStrengths=%r", partyStrengths)
     return j, partyStrengths
 
-DECAY_HL = 3 # half-life, days
+DECAY_HL = 3.5 # half-life, days
 
 def calcTrend(trendData) -> float:
     """
@@ -134,7 +139,8 @@ def calcTrend(trendData) -> float:
         value = pollValue
         decayTime = abs(dateInt - currentDate)
         decay = 0.5 ** (decayTime*1.0 / DECAY_HL)
-        weight = (sample**0.5)*decay
+        weight = sample*decay
+        #weight = (sample**0.5)*decay
         valuesWeights.append((value, weight))
     #//for trendItem
     trend = weightedAverage(valuesWeights)
@@ -175,7 +181,7 @@ def getPartyLegend(partyStrengths) -> str:
         color = ps['color']
         strength = ps['strength']
         h += form("""<span style='color:{color}'>
-            {strength:.1f}% {name}</span> &nbsp; """,
+            {strength:.1f}% {name}</span>&nbsp; """,
             color = color,
             strength = strength,
             name = name)       
@@ -270,7 +276,39 @@ def addPoll(**kwargs):
 
 #---------------------------------------------------------------------
 
-#===== latest
+#===== 17 May
+addPoll(
+    date="2019-05-17",
+    org="Survation",
+    sample=1000,
+    vs="3 24 14 12 4 30 3"
+)
+addPoll(
+    date="2019-05-17",
+    org="YouGov",
+    sample=9260,
+    vs="3 15 9 17 11 34 4"
+)
+addPoll(
+    date="2019-05-16",
+    org="Opinium",
+    sample=2009,
+    vs="2 20 12 15 6 34 3"
+)
+addPoll(
+    date="2019-05-16",
+    org="YouGov",
+    sample=7192,
+    vs="3 15 9 16 10 35 5"
+)
+addPoll(
+    date="2019-05-13",
+    org="Hanbury",
+    sample=2000,
+    vs="3 25 13 14 6 30 6"
+)
+
+#===== 12 May
 addPoll(
     date="2019-05-12",
     org="ComRes",
@@ -398,6 +436,7 @@ addPoll(
     sample=2000,
     vs="7 38 23 8 4 10 4"
 )
+
 
 
 
