@@ -30,7 +30,6 @@ def polls():
     )
     return h
 
-
 def pollTable() -> str:
     partyCols = ""
     for p in POLL_PARTIES:
@@ -76,6 +75,8 @@ def pollTable() -> str:
     h += "</table>"
     return h
 
+PARTY_X_ADJ = [-0.25, 0.0, 0.25, -0.25, 0.0, 0.0, 0.0]
+
 def pollChartData() -> dict:
     """ return data for poll chart, in format for Flot charting
     application
@@ -84,13 +85,13 @@ def pollChartData() -> dict:
     allPolls = sorted(Poll.polls, key=lambda po: po.dateInt)
     j = []
     partyStrengths = []
-    for p in POLL_PARTIES:
+    for p, xAdj in zip(POLL_PARTIES, PARTY_X_ADJ):
         pa = party.Party.docs[p]
         xySeries = []
         dataForTrend = []
         trendSeries = []
         for po in allPolls:
-            xySeries.append([po.dateInt, po.__dict__[p]])
+            xySeries.append([po.dateInt+xAdj, po.__dict__[p]])
             dataForTrend.append(
                 (po.dateInt, po.sample, po.__dict__[p]))
             trendSeries.append([po.dateInt, calcTrend(dataForTrend)])
@@ -125,7 +126,7 @@ def pollChartData() -> dict:
     dpr("partyStrengths=%r", partyStrengths)
     return j, partyStrengths
 
-DECAY_HL = 3.5 # half-life, days
+DECAY_HL = 3.0 # half-life, days
 
 def calcTrend(trendData) -> float:
     """
@@ -276,6 +277,96 @@ def addPoll(**kwargs):
 
 #---------------------------------------------------------------------
 
+#===== 22 May
+addPoll(
+    date="2019-05-22",
+    org="Survation",
+    sample=2029,
+    ukip=3,
+    lab=23,
+    con=14,
+    ld=12,
+    grn=7,
+    brex=31,
+    chuk=4,
+)
+addPoll(
+    date="2019-05-22",
+    org="BMG",
+    sample=1601,
+    ukip=2,
+    lab=18,
+    con=12,
+    ld=17,
+    grn=8,
+    brex=35,
+    chuk=4,
+)
+addPoll(
+    date="2019-05-22",
+    org="Ipsos MORI",
+    sample=1527,
+    ukip=3,
+    lab=15,
+    con=9,
+    ld=20,
+    grn=10,
+    brex=35,
+    chuk=3,
+)
+
+#===== 21 May
+addPoll(
+    date="2019-05-21",
+    org="YouGov",
+    sample=3864,
+    vs="3 13 7 19 12 37 4"
+)
+addPoll(
+    date="2019-05-21",
+    org="Number Cruncher",
+    sample=1005,
+    ukip=2,
+    lab=19,
+    con=15,
+    ld=16,
+    grn=7,
+    brex=33,
+    chuk=4,
+)
+addPoll(
+    date="2019-05-21",
+    org="Kantar",
+    sample=2316,
+    ukip=4,
+    lab=24,
+    con=13,
+    ld=15,
+    grn=8,
+    brex=27,
+    chuk=5,
+)
+addPoll(
+    date="2019-05-21",
+    org="Panelbase",
+    sample=2033,
+    vs="3 25 12 15 7 30 3"
+)
+
+#===== 20 May
+addPoll(
+    date="2019-05-20",
+    org="Opinium",
+    sample=1000,
+    ukip=2,
+    lab=17,
+    con=12,
+    ld=15,
+    grn=7,
+    brex=38,
+    chuk=3,
+)
+
 #===== 17 May
 addPoll(
     date="2019-05-17",
@@ -285,9 +376,22 @@ addPoll(
 )
 addPoll(
     date="2019-05-17",
+    org="ComRes",
+    sample=4161,
+    vs="3 22 12 14 7 32 5"
+)
+addPoll(
+    date="2019-05-17",
     org="YouGov",
     sample=9260,
     vs="3 15 9 17 11 34 4"
+)
+
+addPoll(
+    date="2019-05-16",
+    org="ComRes",
+    sample=2041,
+    vs="2 23 9 16 9 31 4"
 )
 addPoll(
     date="2019-05-16",

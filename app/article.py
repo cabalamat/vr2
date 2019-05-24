@@ -28,10 +28,14 @@ def articles():
 
 def getArticles():
     articleFns = butil.getFilenames(ARTICLE_DIR, "*.md")
+    dpr("ARTICLE_DIR=%r", ARTICLE_DIR)
+    dpr("articleFns=%r", articleFns)
     h = ""
     for afn in articleFns:
         title = getTitle(butil.join(ARTICLE_DIR, afn))
-        h = form("<p><a href='/article/{art}'>{title}</a></p>\n",
+        dpr("afn=%r title=%r", afn, title)
+        h += form("<p><a href='/article/{art}'>"
+            "<i class='fa fa-file-text-o'></i> {title}</a></p>\n",
             art = afn[:-3],
             title = title)
     #//for
